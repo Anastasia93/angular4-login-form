@@ -1,0 +1,23 @@
+﻿a {
+    cursor: pointer;
+}
+
+.help-block {
+    font-size: 12px;
+}
+
+.app-container {
+    background-color: antiquewhite;
+    padding: 30px;
+}
+
+#openweathermap-widget-15 {
+    margin: 25px -40px;
+}
+
+@media all
+and (max-width : 319px){
+    html, body {
+        width: 310px;
+    }
+}
