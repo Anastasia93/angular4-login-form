@@ -20,11 +20,22 @@ var RegisterComponent = (function () {
         this.model = {};
         this.loading = false;
     }
+    RegisterComponent.prototype.changeListener = function ($event) {
+        this.readThis($event.target);
+    };
+    RegisterComponent.prototype.readThis = function (inputValue) {
+        var _this = this;
+        var file = inputValue.files[0];
+        var myReader = new FileReader();
+        myReader.onloadend = function (e) {
+            _this.model.photo = myReader.result;
+        };
+        myReader.readAsDataURL(file);
+    };
     RegisterComponent.prototype.register = function () {
         var _this = this;
         this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(function (data) {
+        this.userService.create(this.model).subscribe(function (data) {
             _this.alertService.success('Registration successful', true);
             _this.router.navigate(['/login']);
         }, function (error) {

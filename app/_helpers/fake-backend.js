@@ -24,9 +24,10 @@ function fakeBackendFactory(backend, options, realBackend) {
                         status: 200,
                         body: {
                             id: user.id,
-                            userName: user.userName,
+                            username: user.username,
                             gender: user.gender,
                             date: user.date,
+                            photo: user.photo,
                             token: 'fake-jwt-token'
                         }
                     })));

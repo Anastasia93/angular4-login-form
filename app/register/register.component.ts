@@ -12,6 +12,20 @@ export class RegisterComponent {
     model: any = {};
     loading = false;
 
+    changeListener($event: any) : void {
+        this.readThis($event.target);
+    }
+
+    readThis(inputValue: any): void {
+        let file:File = inputValue.files[0];
+        let myReader:FileReader = new FileReader();
+
+        myReader.onloadend = (e) => {
+            this.model.photo = myReader.result;
+        };
+        myReader.readAsDataURL(file);
+    }
+
     constructor(
         private router: Router,
         private userService: UserService,
@@ -19,9 +33,7 @@ export class RegisterComponent {
 
     register() {
         this.loading = true;
-
-        this.userService.create(this.model)
-            .subscribe(
+        this.userService.create(this.model).subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
                     this.router.navigate(['/login']);
@@ -30,5 +42,6 @@ export class RegisterComponent {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+
     }
 }
